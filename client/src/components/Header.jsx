@@ -34,7 +34,7 @@ const Header = () => {
             </li>
           </Link>
 
-          <Link to={"/sign-in"}>
+          <Link to={"/profile"}>
             {currentUser ? (
               <img
                 className="w-10 h-10 rounded-full"
