@@ -5,3 +5,8 @@
 body {
   background-color: rgb(241, 245, 241);
 }
+
+.swiper-slide-background {
+  width: 100%;
+  height: 550px; /* Adjust the height as needed */
+}
