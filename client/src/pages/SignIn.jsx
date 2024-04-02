@@ -38,8 +38,8 @@ const SignIn = () => {
       }
       dispatch(signInSuccess(data));
       navigate("/");
-    } catch (error) {
-      dispatch(signInFailure(error.message));
+    } catch (err) {
+      dispatch(signInFailure(err.message));
     }
   };
   return (
