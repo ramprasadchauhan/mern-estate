@@ -93,21 +93,53 @@ const Search = () => {
       setSidebarData({ ...sidebarData, sort, order });
     }
   };
-  console.log(listings);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams();
-    urlParams.set("searchTerm", sidebarData.searchTerm);
-    urlParams.set("type", sidebarData.type);
-    urlParams.set("parking", sidebarData.parking);
-    urlParams.set("furnished", sidebarData.furnished);
-    urlParams.set("offer", sidebarData.offer);
+
+    if (sidebarData.searchTerm) {
+      urlParams.set("searchTerm", sidebarData.searchTerm);
+    }
+
+    // Add type to URL params
+    if (sidebarData.type !== "all") {
+      urlParams.set("type", sidebarData.type);
+    }
+
+    // Add parking to URL params
+    if (sidebarData.parking) {
+      urlParams.set("parking", sidebarData.parking);
+    }
+
+    // Add furnished to URL params
+    if (sidebarData.furnished) {
+      urlParams.set("furnished", sidebarData.furnished);
+    }
+
+    // Add offer to URL params
+    if (sidebarData.offer) {
+      urlParams.set("offer", sidebarData.offer);
+    }
     urlParams.set("sort", sidebarData.sort);
     urlParams.set("order", sidebarData.order);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
-
+  const onShowMore = async () => {
+    const numberOfListings = listings.length;
+    const startIndex = numberOfListings;
+    const urlParams = new URLSearchParams(location.search);
+    urlParams.set("startIndex", startIndex);
+    const searchQuery = urlParams.toString();
+    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const data = await res.json();
+    console.log(data);
+    if (data.length < 9) {
+      setShowMore(false);
+    }
+    setListings([...listings, ...data]);
+  };
   return (
     <div className="flex flex-col md:flex-row">
       <div className="p-7 border-b-2 md:border-r-2 min-h-screen">
@@ -228,6 +260,14 @@ const Search = () => {
             listings.map((listing) => (
               <ListingItem key={listing._id} listing={listing} />
             ))}
+          {showMore && (
+            <button
+              className="text-green-700 w-full text-center hover:underline p-7"
+              onClick={onShowMore}
+            >
+              Show More
+            </button>
+          )}
         </div>
       </div>
     </div>
