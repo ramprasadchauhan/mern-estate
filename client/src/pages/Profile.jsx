@@ -124,8 +124,7 @@ const Profile = () => {
       dispatch(deleteUserFailure(error.message));
     }
   };
-  console.log(currentUser);
-  console.log(error);
+
   const handleShowListings = async () => {
     try {
       setShowListingError(false);
