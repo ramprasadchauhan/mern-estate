@@ -23,7 +23,7 @@ const Header = () => {
     }
   }, [location.search]);
   return (
-    <header className="bg-slate-200 shadow-md">
+    <header className="bg-slate-200 shadow-md sticky top-0">
       <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
         <Link to={"/"}>
           <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
@@ -48,12 +48,12 @@ const Header = () => {
         </form>
         <ul className="flex justify-center items-center gap-3">
           <Link to={"/"}>
-            <li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer">
+            <li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer hover:text-pink-500 transition duration-200">
               Home
             </li>
           </Link>
           <Link to={"/about"}>
-            <li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer">
+            <li className="hidden sm:inline text-slate-700 hover:underline cursor-pointer hover:text-pink-500 transition duration-200">
               About
             </li>
           </Link>
